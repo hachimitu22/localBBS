@@ -1,50 +1,53 @@
 const BBS = function () {
 };
-
-const addThread = function(target) {
-  var threadListElement = target.parentElement;
-  var threadElement = document.getElementsByClassName("thread")[0].cloneNode(true);
-  const id = 'thread' + bbs.nextThreadNumber;
+BBS.prototype.addThread = function (element) {
+  let threadsElement = element.parentElement;
+  let threadElement = document.getElementsByClassName('thread')[0].cloneNode(true);
 
   threadElement.style.display = 'block';
-  threadElement.id = id;
 
-  bbs.nextThreadNumber++;
-  bbs.threads[id] = {
-    'element': threadElement,
-    'reses' : {},
-    'nextResNumber': 1
-  };
-  
-  threadListElement.appendChild(threadElement);
+  threadsElement.appendChild(threadElement);
 };
-const delThread = function(target) {
-  let threadElement = target.parentElement;
-  const id = threadElement.id;
+BBS.prototype.delThread = function (element) {
+  let threadElement = element.parentElement;
 
   if (!threadElement || !window.confirm('本当にスレを消して良いですか？')) {
     // 何もしない
   }
-  
-  delete bbs.threads[id];
+
   threadElement.parentNode.removeChild(threadElement);
 };
-const addRes = function(target) {
-  let parent = target.parentElement;
-  let child = document.getElementsByClassName("res")[0].cloneNode(true);
+BBS.prototype.addRes = function (element) {
+  let parentElement = element.parentElement;
+  let resElement = document.getElementsByClassName('res')[0].cloneNode(true);
 
-  child.style.display = 'block';
+  resElement.style.display = 'block';
 
-  parent.appendChild(child);
+  parentElement.appendChild(resElement);
 };
-const delRes = function(target) {
-  let resElement = target.parentElement;
-  
+BBS.prototype.delRes = function (element) {
+  let resElement = element.parentElement;
+
   if (resElement && window.confirm('本当にレスを消して良いですか？')) {
     resElement.parentNode.removeChild(resElement);
   } else {
     // 何もしない
   }
+};
+
+let bbs = new BBS();
+
+const addThread = function (target) {
+  bbs.addThread(target);
+};
+const delThread = function (target) {
+  bbs.delThread(target);
+};
+const addRes = function (target) {
+  bbs.addRes(target);
+};
+const delRes = function (target) {
+  bbs.delRes(target);
 };
 
 const showDomTreeOnColsole = function() {
