@@ -1,6 +1,29 @@
 const BBS = function () {
   this.threadCount = 0;
   this.resCount = 0;
+  this.tree = Object.create(null);
+};
+BBS.prototype._updateTree = function () {
+  const root = document.getElementsByClassName('thread-list')[0];
+
+  const recursive = function (element, tree) {
+    if (element.id) {
+      tree[element.id] = Object.create(null);
+      tree = tree[element.id];
+    }
+
+    const childList = element.children;
+    if (!childList || childList.length === 0) {
+      return;
+    }
+
+    for (let i = 0; i < childList.length; i++) {
+      recursive(childList[i], tree);
+    }
+  };
+
+  this.tree = Object.create(null);
+  recursive(root, this.tree);
 };
 BBS.prototype.addThread = function (element) {
   let threadsElement = element.parentElement;
@@ -11,6 +34,8 @@ BBS.prototype.addThread = function (element) {
   threadElement.id = 'thread' + this.threadCount;
 
   threadsElement.appendChild(threadElement);
+
+  this._updateTree();
 };
 BBS.prototype.delThread = function (element) {
   let threadElement = element.parentElement;
@@ -20,6 +45,8 @@ BBS.prototype.delThread = function (element) {
   }
 
   threadElement.parentNode.removeChild(threadElement);
+
+  this._updateTree();
 };
 BBS.prototype.addRes = function (element) {
   let parentElement = element.parentElement;
@@ -30,6 +57,8 @@ BBS.prototype.addRes = function (element) {
   resElement.id = 'res' + this.resCount;
 
   parentElement.appendChild(resElement);
+
+  this._updateTree();
 };
 BBS.prototype.delRes = function (element) {
   let resElement = element.parentElement;
@@ -39,6 +68,8 @@ BBS.prototype.delRes = function (element) {
   } else {
     // 何もしない
   }
+
+  this._updateTree();
 };
 
 let bbs = new BBS();
