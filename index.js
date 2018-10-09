@@ -1,10 +1,14 @@
 const BBS = function () {
+  this.threadCount = 0;
+  this.resCount = 0;
 };
 BBS.prototype.addThread = function (element) {
   let threadsElement = element.parentElement;
   let threadElement = document.getElementsByClassName('thread')[0].cloneNode(true);
 
   threadElement.style.display = 'block';
+  this.threadCount++;
+  threadElement.id = 'thread' + this.threadCount;
 
   threadsElement.appendChild(threadElement);
 };
@@ -22,6 +26,8 @@ BBS.prototype.addRes = function (element) {
   let resElement = document.getElementsByClassName('res')[0].cloneNode(true);
 
   resElement.style.display = 'block';
+  this.resCount++;
+  resElement.id = 'res' + this.resCount;
 
   parentElement.appendChild(resElement);
 };
