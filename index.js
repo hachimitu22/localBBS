@@ -56,8 +56,8 @@ const delRes = function (target) {
   bbs.delRes(target);
 };
 
-const showDomTreeOnColsole = function() {
-  const root = document.getElementsByClassName("thread-list")[0];
+const showDomTreeOnColsole = function () {
+  const root = document.getElementsByClassName('thread-list')[0];
   const domTree = generateDomTreeString(root);
   console.log(domTree);
 };
@@ -68,19 +68,19 @@ const domString = function (element) {
 
 const generateDomTreeString = function (element, indent) {
   indent = indent || '';
-  
+
   const dom = indent + '+ ' + domString(element) + '\n';
   const childList = element.children;
   if (!childList || childList.length === 0) {
     return dom;
   }
-  
+
   let domTree = dom;
   indent += '  ';
   for (let i = 0; i < childList.length; i++) {
     domTree += generateDomTreeString(childList[i], indent);
   }
-  
+
   return domTree;
 };
 
