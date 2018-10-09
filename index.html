@@ -1,0 +1,42 @@
+<!doctype html>
+ 
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    
+    <title>BBS</title>
+    <meta name="description" content="${description}" />
+    
+    <link rel="stylesheet" href="./index.css" type="text/css" />
+  </head>
+  <body>
+    <div class="res">
+      <textarea></textarea><br>
+      <input type="button" value="レス追加" onclick="addRes(this)">
+      <input type="button" value="レス削除" onclick="delRes(this)"><br>
+    </div>
+    <div class="thread">
+      <p>タイトル</p>
+      <textarea></textarea><br>
+      <input type="button" value="レス追加" onclick="addRes(this)">
+      <input type="button" value="スレ削除" onclick="delThread(this)">
+    </div>
+    <div class="dom-tree">
+      <input type="button" value="domツリー表示" onclick="showDomTreeOnColsole()">
+      <span></span>
+    </div>
+    <div class="bbs-object">
+      <input type="button" value="bbsオブジェクト表示" onclick="showBbsObjectOnColsole()">
+      <span></span>
+    </div>
+    <div class="thread-list">
+      <p>スレッド</p>
+      <input type="button" value="スレ追加" onclick="addThread(this)"><br>
+    </div>
+    
+    <script src="./index.js"></script>
+  </body>
+</html>
+
