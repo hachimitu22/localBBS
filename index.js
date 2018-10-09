@@ -25,6 +25,9 @@ BBS.prototype._updateTree = function () {
   this.tree = Object.create(null);
   recursive(root, this.tree);
 };
+BBS.prototype.generateTreeJson = function () {
+  return JSON.stringify(this.tree, null, '  ');
+};
 BBS.prototype.addThread = function (element) {
   let threadsElement = element.parentElement;
   let threadElement = document.getElementsByClassName('thread')[0].cloneNode(true);
@@ -117,4 +120,18 @@ const generateDomTreeString = function (element, indent) {
 
 const showBbsObjectOnColsole = function () {
   console.log(bbs);
+};
+
+const handleDownload = function () {
+  const content = JSON.stringify(bbs.generateTreeJson());
+  let blob = new Blob([content], {
+    'type': 'application/json'
+  });
+
+  if (window.navigator.msSaveBlob) {
+    window.nabigator.msSaveBlob(blob, 'test.json');
+    window.nabigator.msSaveOrOpenBlob(blob, 'test.json');
+  } else {
+    document.getElementById('download').href = window.URL.createObjectURL(blob);
+  }
 };
